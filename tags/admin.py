@@ -3,5 +3,7 @@ from .models import Tag
 
 # Tab model
 
-admin.site.register(Tag)
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    search_fields = ['label']
 
