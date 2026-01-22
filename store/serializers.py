@@ -15,7 +15,10 @@ class ProductSerializer(serializers.Serializer):
     #     queryset = Collection.objects.all()
     # )
     # collection = serializers.StringRelatedField()
-    collection = CollectionSerializer()
+    collection = serializers.HyperlinkedRelatedField(
+        queryset = Collection.objects.all(),
+        view_name = 'collection-detail'
+    )
 
 
     def calculated_tax(self,product:Product):
