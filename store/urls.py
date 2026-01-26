@@ -1,8 +1,8 @@
 from . import views
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import SimpleRouter,DefaultRouter
 
 
-router = SimpleRouter()
+router = DefaultRouter()
 router.register('products',views.ProductViewSet)
 router.register('collections',views.CollectionViewSet)
 
