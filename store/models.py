@@ -67,7 +67,8 @@ class Customer(models.Model):
     birth_date = models.DateField(null=True)
     membership = models.CharField(
         max_length=1,  choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
@@ -75,7 +76,7 @@ class Customer(models.Model):
     @admin.display(ordering='user__first_name')
     def first_name(self):
         return self.user.first_name
-    
+
     @admin.display(ordering='user__last_name')
     def last_name(self):
         return self.user.last_name
@@ -100,10 +101,9 @@ class Order(models.Model):
         max_length=1, choices=PAYMENT_STATUS_CHOICES, default=PAYMENT_STATUS_PENDING)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
 
-
     class Meta:
-        permissions =[
-            ('cancel_order','Can cancel order')
+        permissions = [
+            ('cancel_order', 'Can cancel order')
         ]
 
 
