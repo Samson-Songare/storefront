@@ -9,7 +9,7 @@ from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyM
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
 from .models import Product, Collection, OrderItem, Review, Cart, CartItem, Customer, Order
-from .serializers import ProductSerializer, CollectionSerializer, ReviewSerializer, CartSerializer, CartItemSerializer, AddCartItemSerializer, UpdateCartItemSerializer, CustomerSerializer, OrderSerializer, CreateOrderSerializer,UpdateOrderSerializer
+from .serializers import ProductSerializer, CollectionSerializer, ReviewSerializer, CartSerializer, CartItemSerializer, AddCartItemSerializer, UpdateCartItemSerializer, CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer
 from .filters import ProductFilter
 from .pagination import DefaultPagination
 from .permissions import IsAdminOrReadOnly, FullDjangoModelPermissions, ViewCustomerHistoryPermission
@@ -94,7 +94,7 @@ class CustomerViewSet(ModelViewSet):
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
     def me(self, request):
-        customer, created = Customer.objects.get_or_create(
+        customer = Customer.objects.get(
             user_id=request.user.id)
         if request.method == 'GET':
             serializer = CustomerSerializer(customer)
@@ -107,10 +107,10 @@ class CustomerViewSet(ModelViewSet):
 
 
 class OrderViewSet(ModelViewSet):
-    http_method_names = ['get','delete','patch','head','options']
+    http_method_names = ['get', 'delete', 'patch', 'head', 'options']
 
     def get_permissions(self):
-        if self.request.method in ['PATCH','DELETE']:
+        if self.request.method in ['PATCH', 'DELETE']:
             return [IsAdminUser()]
         return [IsAuthenticated()]
 
