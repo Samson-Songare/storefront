@@ -164,7 +164,7 @@ class CreateOrderSerializer(serializers.Serializer):
             Cart.objects.filter(pk=cart_id).delete()
 
             order_created.send_robust(self.__class__, order=order)
-            return Order
+            return order
 
 
 class UpdateOrderSerializer(serializers.ModelSerializer):
