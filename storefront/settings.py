@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters',
     'djoser',
     'rest_framework',
+    "corsheaders",
     'playground',
     'debug_toolbar',
     'store',
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -159,3 +161,8 @@ DJOSER ={
         'current_user':'core.serializers.UserSerializer'
     }
 }
+
+CORS_ALLOWED_ORIGINS =[
+    'http://localhost:8001',
+
+]
