@@ -173,3 +173,7 @@ HOST_USER = ''
 HOST_PASSWORD = ''
 EMAIL_PORT = 2525
 DEFAULT_FROM_EMAIL = 'storefront <admin@storefront.com>'
+
+ADMINS =[
+    ('samson','samsloyshock@gmail.com')
+]
