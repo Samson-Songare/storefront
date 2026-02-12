@@ -1,10 +1,13 @@
-from django.core.mail import send_mail, mail_admins, BadHeaderError
+from django.core.mail import EmailMessage, BadHeaderError
 from django.shortcuts import render
 
 
 def say_hello(request):
     try:
-        mail_admins('warning','be careful your site is about to be hacked',html_message='warning')
+        message = EmailMessage(
+            'warning', 'you must be very careful', 'from@samson.com', ['elf@gmail.com'])
+        message.attach_file('playground/static/images/halleluya.png')
+        message.send()
     except BadHeaderError:
         pass
 
